@@ -1,20 +1,22 @@
 import React from 'react';
-import './CustomInput.css'; // Import the CSS file for styling
-import theme from '../theme/index';
+import './CustomInput.css';
+import {getTheme} from '../theme/index';
 
-const CustomInput = ({ label, type, value, onChange, required }) => {
+const CustomInput = ({ label, type, value, onChange, required, style }) => {
+    const theme = getTheme();
+  
   return (
-    <div className="custom-input">
-      <label style={{ color: theme.text.primary }}>{label}</label>
+    <div className="custom-input" style={style}>
       <input
         type={type}
         value={value}
         onChange={onChange}
         required={required}
+        placeholder={label}
         style={{
-          borderColor: theme.border.primary,
-          color: theme.text.primary,
-          backgroundColor: theme.background.secondary,
+          borderColor: theme.primary,
+          color: theme.primary,
+          backgroundColor: theme.secondaryBackground,
         }}
       />
     </div>

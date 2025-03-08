@@ -3,21 +3,29 @@
 }
 
 .custom-input label {
-  display: block;
-  margin-bottom: 8px;
+  display: inline-block;
+  width: 30%;
+  margin-right: 10px;
   font-weight: bold;
+  vertical-align: middle;
+  color: var(--text-color);
 }
 
 .custom-input input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  display: block;
+  width: 60%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   box-sizing: border-box;
+  margin: 0 auto;
+  background-color: var(--primary-background);
+  color: var(--text-color);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .custom-input input:focus {
-  border-color: #66afe9;
+  border-color: var(--primary-color);
   outline: none;
-  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
 }
