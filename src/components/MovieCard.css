@@ -1,0 +1,50 @@
+.movie-card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+  transform: scale(1.02);
+}
+
+.movie-card-image {
+  width: 30%;
+  object-fit: cover;
+}
+
+.movie-card-content {
+  padding: 10px;
+  width: 70%;
+}
+
+.movie-card-content h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.movie-card-content p {
+  margin: 5px 0 0;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    flex-direction: column;
+  }
+
+  .movie-card-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .movie-card-content {
+    width: 100%;
+  }
+}
