@@ -17,9 +17,7 @@ all while unraveling the secrets of the universe's past and future.`, imageUrl: 
   return (
     <>
       <div className="movie-list">
-        {/* Add the create movie button here */}
-        <Button label="Create Movie" onClick={() => console.log('Create movie button clicked')} />
-        
+        <Button label="Create Movie" style={{display: 'flex', marginLeft: 'auto'}} onClick={() => console.log('Create movie button clicked')} />
         {movies.map((movie, index) => (
           <MovieCard
             key={index}

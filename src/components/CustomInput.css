@@ -1,0 +1,23 @@
+.custom-input {
+  margin-bottom: 16px;
+}
+
+.custom-input label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.custom-input input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.custom-input input:focus {
+  border-color: #66afe9;
+  outline: none;
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
