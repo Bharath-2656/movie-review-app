@@ -2,10 +2,14 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateMovie from './screens/CreateMovie';
 import Home from './screens/Home';
-import { getTheme } from './theme/theme';
+import { configureTheme, getTheme } from './theme/theme';
+import { useEffect } from 'react';
 
 function App() {
-  const theme = getTheme()
+  const theme = getTheme();
+  useEffect(() => {
+    configureTheme();
+  }, []);
 
   return (
     <div style={{width: '100%', height: '100%', backgroundColor: theme.primaryBackground }}>

@@ -1,0 +1,7 @@
+.save-rating-button {
+  padding: 6px;
+  gap: 5px;
+  border-radius: 20%;
+  background-color: var(--primary);
+  color: var(--primaryBackground);
+}

@@ -4,6 +4,7 @@
   flex-direction: row;
   border: 1px solid var(--border-color);
   border-radius: 8px;
+  background-color: var(--secondaryBackground);
   overflow: hidden;
   width: 60%;
   justify-self: center;
@@ -20,7 +21,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: var(--card-header-bg);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -67,18 +67,19 @@
 }
 
 .edit-button {
-  background-color: var(--success-bg);
-  color: white;
+  background-color: var(--primary);
+  color: var(--primaryBackground);
 }
 
 .delete-button {
-  background-color: var(--danger-bg);
-  color: white;
+  background-color: var(--error);
+  color: var(--primaryBackground);
 }
 
 .movie-card-rating {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   margin-top: 10px;
 }

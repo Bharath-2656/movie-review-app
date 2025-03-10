@@ -64,3 +64,21 @@ export const theme = {
   },
 };
 
+
+const applyTheme = (themeName = 'light') => {
+  const themeVariables = theme.theme[themeName] || theme.theme.light;
+  Object.keys(themeVariables).forEach((key) => {
+    document.documentElement.style.setProperty(`--${key}`, themeVariables[key]);
+  });
+};
+
+export const configureTheme = () => {
+  // Apply the default theme based on system preferences
+  const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  applyTheme(theme);
+  
+  // Optional: Add a listener for theme changes
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    applyTheme(e.matches ? "dark" : "light");
+  });
+}

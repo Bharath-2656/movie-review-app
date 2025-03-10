@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaEdit, FaTrashAlt, FaStar, FaCheck } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaCheck } from 'react-icons/fa';
 import './MovieCard.css';
+import RatingComponent from './Rating';
 
 const MovieCard = ({ title, description, releaseYear, genre, director, imageUrl }) => {
   return (
@@ -19,11 +20,9 @@ const MovieCard = ({ title, description, releaseYear, genre, director, imageUrl 
         <p><strong>Genre:</strong> {genre}</p>
         <p><strong>Director:</strong> {director}</p>
         <div className="movie-card-rating">
-          <span>Rating: 8.8/10</span>
           <div className="stars">
-            <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+            <RatingComponent  />
           </div>
-          <FaCheck className="check-icon" />
         </div>
       </div>
     </div>
