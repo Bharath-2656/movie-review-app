@@ -1,12 +1,12 @@
 .movie-card {
-  margin-top: 7%;
+  margin: 2%;
   display: flex;
   flex-direction: row;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
-  width: 100%;
-  margin: 10px;
+  width: 60%;
+  justify-self: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
@@ -15,13 +15,26 @@
   transform: scale(1.02);
 }
 
+.movie-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--card-header-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
 .movie-card-image {
   width: 30%;
+  align-self: center;
   object-fit: cover;
 }
 
 .movie-card-content {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 2%;
   width: 70%;
 }
 
@@ -32,7 +45,51 @@
 
 .movie-card-content p {
   margin: 5px 0 0;
-  color: #555;
+  color: var(--text-color);
+}
+
+.movie-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-button, .delete-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.edit-button {
+  background-color: var(--success-bg);
+  color: white;
+}
+
+.delete-button {
+  background-color: var(--danger-bg);
+  color: white;
+}
+
+.movie-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.check-icon {
+  color: var(--success-bg);
 }
 
 @media (max-width: 768px) {

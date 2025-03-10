@@ -1,11 +1,11 @@
 import React from 'react';
 import './Button.css'; // Import the CSS file for styling
-import {getTheme}  from '../theme/index'
+import {getTheme}  from '../theme/theme'
 
-const Button = ({ label, onClick, style }) => {
+const Button = ({ children, label, onClick, style, className }) => {
   const theme = getTheme();
   return (
-    <button className="button" style={{ ...style, backgroundColor: theme.primaryBackground }} onClick={onClick}>
+    <button className={className} style={{ backgroundColor: theme.primary, color: theme.primaryBackground ,...style }} children={children} onClick={onClick}>
       {label}
     </button>
   );

@@ -13,6 +13,7 @@
 
 .custom-input input {
   display: block;
+  font-size: medium;
   width: 60%;
   padding: 10px;
   border: 1px solid var(--border-color);
@@ -28,4 +29,8 @@
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+}
+
+.custom-input input.invalid {
+  border-color: red !important;
 }

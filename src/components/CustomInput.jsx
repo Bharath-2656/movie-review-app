@@ -1,24 +1,43 @@
-import React from 'react';
-import './CustomInput.css';
-import {getTheme} from '../theme/index';
+import React from "react";
+import "./CustomInput.css";
+import { getTheme } from "../theme/theme";
 
-const CustomInput = ({ label, type, value, onChange, required, style }) => {
-    const theme = getTheme();
-  
+const CustomInput = ({ name, label, type, value, onChange, required, style }) => {
+  const theme = getTheme();
+
   return (
     <div className="custom-input" style={style}>
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        required={required}
-        placeholder={label}
-        style={{
-          borderColor: theme.primary,
-          color: theme.primary,
-          backgroundColor: theme.secondaryBackground,
-        }}
-      />
+      {type === "textarea" ? (
+        <textarea
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          required={required}
+          placeholder={label}
+          style={{
+            width: '100%',
+            borderRadius: '8px',
+            borderColor: theme.secondaryBackground,
+            color: theme.primary,
+            backgroundColor: theme.secondaryBackground,
+          }}
+        />
+      ) : (
+        <input
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          required={required}
+          placeholder={label}
+          style={{
+            borderColor: theme.primary,
+            color: theme.primary,
+            backgroundColor: theme.secondaryBackground,
+          }}
+        />
+      )}
     </div>
   );
 };
