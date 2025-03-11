@@ -12,9 +12,9 @@
   transition: transform 0.2s;
 }
 
-.movie-card:hover {
+/* .movie-card:hover {
   transform: scale(1.02);
-}
+} */
 
 .movie-card-header {
   display: flex;

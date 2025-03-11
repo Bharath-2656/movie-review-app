@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import './CreateMovie.css';
 import CustomInput from '../components/CustomInput';
 import Button from '../components/Button';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const CreateMovie = () => {
   const navigate = useNavigate();
   const [movie, setMovie] = useState({
@@ -14,34 +15,43 @@ const CreateMovie = () => {
     imageUrl: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
-    console.log(e.target);
-    console.log('Name:', name, 'Value:', value);
     setMovie((prevMovie) => ({ ...prevMovie, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   }, []);
 
-const handleSubmit = useCallback((e) => {
-  e.preventDefault();
-  const { title, description, releaseYear, genre, director, imageUrl } = movie;
-  
-  if (!title || !description || !releaseYear || !genre || !director || !imageUrl) {
-    alert('All fields are required');
-    return;
-  }
-  
-  console.log('New Movie:', movie);
-  // Reset form fields
-  setMovie({
-    title: '',
-    description: '',
-    releaseYear: '',
-    genre: '',
-    director: '',
-    imageUrl: '',
-  });
-  navigate('/');
-}, [movie, navigate]);
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+    setErrors((prevErrors) => ({ [e.target.name]: '' }));
+
+
+    if (!movie.title) errors.title = 'Title is required';
+    if (!movie.description) errors.description = 'Description is required';
+    console.log(!movie.releaseYear || isNaN(movie.releaseYear) || (movie.releaseYear < 1900 || movie.releaseYear > 2025));
+    if (!movie.releaseYear || isNaN(movie.releaseYear) || (movie.releaseYear < 1900 || movie.releaseYear > 2025)) errors.releaseYear = 'Release Year must be a number';
+    if (!movie.genre) errors.genre = 'Genre is required';
+    if (!movie.director) errors.director = 'Director is required';
+    if (!movie.imageUrl) errors.imageUrl = 'Image URL is required';
+    setErrors(() => ({ ...errors, [e.target.name]: '' }));
+
+    if (Object.keys(errors).length > 0) return;
+
+    console.log('New Movie:', movie);
+    // Reset form fields
+    setMovie({
+      title: '',
+      description: '',
+      releaseYear: '',
+      genre: '',
+      director: '',
+      imageUrl: '',
+    });
+    navigate('/');
+  }, [movie, navigate, errors]);
+
   const fields = [
     { label: 'Movie Title', name: 'title', type: 'text' },
     { label: 'Description', name: 'description', type: 'text' },
@@ -57,7 +67,7 @@ const handleSubmit = useCallback((e) => {
       <form onSubmit={handleSubmit}>
         {fields.map(({ label, name, type }) => (
           <div key={name} className="form-group">
-            <label>{label}:</label>
+            <label><strong>{label}:</strong></label>
             <CustomInput
               label={label}
               type={type}
@@ -65,10 +75,17 @@ const handleSubmit = useCallback((e) => {
               value={movie[name]}
               onChange={handleInputChange}
               required
+              error={errors[name]}
             />
+            {errors[name] && <span className="error-message">{errors[name]}</span>}
           </div>
         ))}
-        <Button label="Add Movie" type="submit" className="submit-button" />
+        <Button
+          label="Add Movie"
+          type="submit"
+          className="submit-button"
+          disabled={Object.keys(errors).length > 0}
+        />
       </form>
     </div>
   );

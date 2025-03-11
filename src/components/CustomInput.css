@@ -11,7 +11,7 @@
   color: var(--text-color);
 }
 
-.custom-input input {
+.custom-input input, .custom-input textarea {
   display: block;
   font-size: medium;
   width: 60%;
@@ -25,12 +25,19 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.custom-input input:focus {
+.custom-input input:focus, .custom-input textarea:focus {
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
 }
 
-.custom-input input.invalid {
+.custom-input input.invalid, .custom-input textarea.invalid {
   border-color: red !important;
+}
+
+.error-message {
+  width: 60%;
+  margin: 0 auto;
+  color: red;
+  font-size: small;
 }

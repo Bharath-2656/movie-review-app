@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEdit, FaTrashAlt, FaCheck } from 'react-icons/fa';
 import './MovieCard.css';
 import RatingComponent from './Rating';
+import DeleteConfirmationModal from './ConfirmationModal';
 
-const MovieCard = ({ title, description, releaseYear, genre, director, imageUrl }) => {
+const MovieCard = ({ id, title, description, releaseYear, genre, director, imageUrl }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleClickOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  const handleDelete = async () => {
+    await onDelete();
+    handleClose();
+  };
+  const onDelete = async (movieId) => {
+    try {
+      console.log('Deleting movie:', movieId);
+      // await apiService.deleteMovie(movieId);
+      // Optionally, refetch the list of movies to update the UI
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+    }
+  };
+
   return (
     <div className="movie-card">
       {imageUrl && <img src={imageUrl} alt={title} className="movie-card-image" />}
@@ -12,7 +36,7 @@ const MovieCard = ({ title, description, releaseYear, genre, director, imageUrl 
           <h3>{title}</h3>
           <div className="movie-card-actions">
             <button className="edit-button"><FaEdit /> Edit</button>
-            <button className="delete-button"><FaTrashAlt /> Delete</button>
+            <button className="delete-button" onClick={() => handleClickOpen(id)}><FaTrashAlt /> Delete</button>
           </div>
         </div>
         <p>{description}</p>
@@ -25,6 +49,12 @@ const MovieCard = ({ title, description, releaseYear, genre, director, imageUrl 
           </div>
         </div>
       </div>
+      <DeleteConfirmationModal
+        key={id}
+        open={openModal}
+        onClose={handleClose}
+        onConfirm={handleDelete}
+      />
     </div>
   );
 };

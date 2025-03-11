@@ -2,7 +2,7 @@ import React from "react";
 import "./CustomInput.css";
 import { getTheme } from "../theme/theme";
 
-const CustomInput = ({ name, label, type, value, onChange, required, style }) => {
+const CustomInput = ({ name, label, type, value, onChange, required, error, style }) => {
   const theme = getTheme();
 
   return (
@@ -21,6 +21,7 @@ const CustomInput = ({ name, label, type, value, onChange, required, style }) =>
             borderColor: theme.secondaryBackground,
             color: theme.primary,
             backgroundColor: theme.secondaryBackground,
+            ...(error ? { borderColor: 'red', borderWidth: '2px' } : {}),
           }}
         />
       ) : (
@@ -35,6 +36,7 @@ const CustomInput = ({ name, label, type, value, onChange, required, style }) =>
             borderColor: theme.primary,
             color: theme.primary,
             backgroundColor: theme.secondaryBackground,
+            ...(error ? { borderColor: 'red', borderWidth: '2px' } : {}),
           }}
         />
       )}
