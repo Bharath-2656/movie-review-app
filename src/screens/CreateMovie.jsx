@@ -3,6 +3,7 @@ import './CreateMovie.css';
 import CustomInput from '../components/CustomInput';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import {createMovie} from '../service/api.service';
 
 const CreateMovie = () => {
   const navigate = useNavigate();
@@ -23,23 +24,21 @@ const CreateMovie = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   }, []);
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
-    setErrors((prevErrors) => ({ [e.target.name]: '' }));
+    setErrors({});
 
+    const validationErrors = {};
+    if (!movie.title) validationErrors.title = 'Title is required';
+    if (!movie.description) validationErrors.description = 'Description is required';
+    if (!movie.releaseYear || isNaN(movie.releaseYear) || (movie.releaseYear < 1900 || movie.releaseYear > 2025)) validationErrors.releaseYear = 'Release Year must be a number';
+    if (!movie.genre) validationErrors.genre = 'Genre is required';
+    if (!movie.director) validationErrors.director = 'Director is required';
+    if (!movie.imageUrl) validationErrors.imageUrl = 'Image URL is required';
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
 
-    if (!movie.title) errors.title = 'Title is required';
-    if (!movie.description) errors.description = 'Description is required';
-    console.log(!movie.releaseYear || isNaN(movie.releaseYear) || (movie.releaseYear < 1900 || movie.releaseYear > 2025));
-    if (!movie.releaseYear || isNaN(movie.releaseYear) || (movie.releaseYear < 1900 || movie.releaseYear > 2025)) errors.releaseYear = 'Release Year must be a number';
-    if (!movie.genre) errors.genre = 'Genre is required';
-    if (!movie.director) errors.director = 'Director is required';
-    if (!movie.imageUrl) errors.imageUrl = 'Image URL is required';
-    setErrors(() => ({ ...errors, [e.target.name]: '' }));
-
-    if (Object.keys(errors).length > 0) return;
-
-    console.log('New Movie:', movie);
+    await createMovie(movie);
     // Reset form fields
     setMovie({
       title: '',
