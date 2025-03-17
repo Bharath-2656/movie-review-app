@@ -1,5 +1,10 @@
+// theme.js
+
 export const getTheme = () => {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
     return theme.theme.dark;
   }
   return theme.theme.light;
@@ -8,64 +13,63 @@ export const getTheme = () => {
 export const theme = {
   theme: {
     light: {
-      text: '#2C2C2E',
-      border: '#D6D6D6',
-      primary: '#52AE77FF',
-      primaryHover: 'rgb(82, 146, 108)',
-      primaryBackground: '#FFFFFF',
-      sidePanelBackground: '#F9F9F9',
-      secondaryBackground: '#EEEEEE',
-      error: '#DC3545',
-      errorBackground: '#F8D7DA',
-      success: '#28A745',
-      successBackground: '#D4EDDA',
-      warning: '#FFC107',
-      warningBackground: '#FFF3CD',
-      neutral: '#6C757D',
-      neutralBackground: '#E2E3E5',
-      shadow: 'rgba(0, 0, 0, 0.1)',
+      text: "#121212",
+      border: "#D1D1D1",
+      primary: "#F5C518", // IMDB yellow
+      primaryHover: "#e0b900",
+      primaryBackground: "#FFFFFF",
+      sidePanelBackground: "#F5F5F5",
+      secondaryBackground: "#EFEFEF",
+      error: "#DC3545",
+      errorBackground: "#F8D7DA",
+      success: "#28A745",
+      successBackground: "#D4EDDA",
+      warning: "#FFC107",
+      warningBackground: "#FFF3CD",
+      neutral: "#6C757D",
+      neutralBackground: "#E2E3E5",
+      shadow: "rgba(0, 0, 0, 0.1)",
     },
     dark: {
-      text: '#FFFFFF',
-      border: '#4D4D4D',
-      primary: '#007BFF',
-      primaryHover: '#0056b3',
-      primaryBackground: '#003049',
-      sidePanelBackground: '#1E1E1E',
-      secondaryBackground: '#343638',
-      error: '#DC3545',
-      errorBackground: '#451515',
-      success: '#28A745',
-      successBackground: '#153B24',
-      warning: '#FFC107',
-      warningBackground: '#4A3A10',
-      neutral: '#6C757D',
-      neutralBackground: '#3C3C3C',
-      shadow: 'rgba(0, 0, 0, 0.4)',
+      text: "#FFFFFF",
+      border: "#333333",
+      primary: "#F5C518", // IMDB yellow
+      primaryHover: "#e0b900",
+      primaryBackground: "#121212",
+      sidePanelBackground: "#1A1A1A",
+      secondaryBackground: "#2A2A2A",
+      error: "#FF6B6B",
+      errorBackground: "#3B1E1E",
+      success: "#28A745",
+      successBackground: "#153B24",
+      warning: "#FFC107",
+      warningBackground: "#4A3A10",
+      neutral: "#999999",
+      neutralBackground: "#3C3C3C",
+      shadow: "rgba(0, 0, 0, 0.4)",
     },
     vibrant: {
-      text: '#212529',
-      border: '#CED4DA',
-      primary: '#E83E8C',
-      primaryHover: '#C01C66',
-      primaryBackground: '#F8F9FA',
-      sidePanelBackground: '#FFFFFF',
-      secondaryBackground: '#F1F3F5',
-      error: '#E74C3C',
-      errorBackground: '#FDEDEC',
-      success: '#27AE60',
-      successBackground: '#E9F7EF',
-      warning: '#F1C40F',
-      warningBackground: '#FCF3CF',
-      neutral: '#95A5A6',
-      neutralBackground: '#ECF0F1',
-      shadow: 'rgba(0, 0, 0, 0.15)',
+      text: "#212529",
+      border: "#CED4DA",
+      primary: "#F5C518",
+      primaryHover: "#e0b900",
+      primaryBackground: "#FFFFFF",
+      sidePanelBackground: "#FAFAFA",
+      secondaryBackground: "#F3F4F6",
+      error: "#E74C3C",
+      errorBackground: "#FDEDEC",
+      success: "#27AE60",
+      successBackground: "#E9F7EF",
+      warning: "#F1C40F",
+      warningBackground: "#FCF3CF",
+      neutral: "#95A5A6",
+      neutralBackground: "#ECF0F1",
+      shadow: "rgba(0, 0, 0, 0.15)",
     },
   },
 };
 
-
-const applyTheme = (themeName = 'light') => {
+const applyTheme = (themeName = "light") => {
   const themeVariables = theme.theme[themeName] || theme.theme.light;
   Object.keys(themeVariables).forEach((key) => {
     document.documentElement.style.setProperty(`--${key}`, themeVariables[key]);
@@ -74,11 +78,15 @@ const applyTheme = (themeName = 'light') => {
 
 export const configureTheme = () => {
   // Apply the default theme based on system preferences
-  const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  applyTheme(theme);
-  
+  const themeName = window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+  applyTheme(themeName);
+
   // Optional: Add a listener for theme changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    applyTheme(e.matches ? "dark" : "light");
-  });
-}
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      applyTheme(e.matches ? "dark" : "light");
+    });
+};

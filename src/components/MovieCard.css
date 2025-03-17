@@ -1,109 +1,120 @@
 .movie-card {
-  margin: 2%;
-  display: flex;
-  flex-direction: row;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
   background-color: var(--secondaryBackground);
+  max-width: 900px;
+  width: 100%;
+  margin: 1rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  width: 60%;
-  justify-self: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  
 }
 
-/* .movie-card:hover {
-  transform: scale(1.02);
-} */
-
-.movie-card-header {
+/* LEFT SECTION */
+.movie-card-left {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+  background-color: var(--primaryBackground);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .movie-card-image {
-  width: 30%;
-  align-self: center;
+  width: 100%;
+  height: auto;
   object-fit: cover;
+  border-radius: 6px;
+  flex-grow: 1;
 }
 
-.movie-card-content {
+.movie-card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-align: center;
+  margin-top: 0.75rem;
+  word-break: break-word;
+}
+
+/* RIGHT SECTION */
+.movie-card-right {
+  padding: 1rem 1.5rem;
   display: flex;
   flex-direction: column;
-  text-align: start;
-  padding: 2%;
-  width: 70%;
+  justify-content: flex-start;
+  background-color: var(--secondaryBackground);
+  box-sizing: border-box;
+  text-align: left;
 }
 
-.movie-card-content h3 {
-  margin: 0;
-  font-size: 1.5em;
-}
-
-.movie-card-content p {
-  margin: 5px 0 0;
+.movie-card-description,
+.movie-card-meta {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
   color: var(--text-color);
+  word-wrap: break-word;
 }
 
+.movie-card-meta strong {
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+
+/* ACTIONS + RATING */
 .movie-card-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
-.edit-button, .delete-button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
+.edit-button,
+.delete-button {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: inherit;
   cursor: pointer;
-  font-size: 0.9em;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.4rem;
 }
 
-.edit-button {
-  background-color: var(--primary);
-  color: var(--primaryBackground);
-}
-
-.delete-button {
-  background-color: var(--error);
-  color: var(--primaryBackground);
+.edit-button:hover,
+.delete-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .movie-card-rating {
+  margin-top: 0.75rem;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
 }
 
-.stars {
-  display: flex;
-  gap: 2px;
-}
-
-.check-icon {
-  color: var(--success-bg);
-}
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .movie-card {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
-  .movie-card-image {
+  .movie-card-left,
+  .movie-card-right {
     width: 100%;
-    height: auto;
+    padding: 1rem;
   }
 
-  .movie-card-content {
-    width: 100%;
+  .movie-card-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .movie-card-actions {
+    justify-content: flex-start;
   }
 }

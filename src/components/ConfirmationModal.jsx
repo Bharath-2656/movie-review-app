@@ -3,26 +3,33 @@ import './ConfirmationModal.css';
 
 const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
   const [confirming, setConfirming] = useState(false);
-console.log('entry log');
+
   const handleConfirmClick = () => {
     setConfirming(true);
+    console.log("Confirming.....")
     setTimeout(() => {
-      if (confirming) {
         onConfirm();
         onClose();
-      }
-    }, 100); // Small delay to ensure the click is registered
+    }, 100);
   };
 
+  if (!open) return null;
+
   return (
-    <div className={`modal ${open ? 'open' : ''}`}>
-      <div className="modal-content">
-        <h2>Delete Movie</h2>
-        <p>Are you sure you want to delete this movie?</p>
-        <button onClick={onClose}>Cancel</button>
-        <button onClick={handleConfirmClick} disabled={confirming}>
-          {confirming ? 'Deleting...' : 'Delete'}
-        </button>
+    <div className="delete-modal-overlay">
+      <div className="delete-modal">
+        <h2 className="delete-modal-title">Delete Movie</h2>
+        <p className="delete-modal-text">Are you sure you want to delete this movie?</p>
+        <div className="delete-modal-actions">
+          <button className="cancel-button" onClick={onClose}>Cancel</button>
+          <button
+            className="confirm-button"
+            onClick={handleConfirmClick}
+            disabled={confirming}
+          >
+            {confirming ? 'Deleting...' : 'Delete'}
+          </button>
+        </div>
       </div>
     </div>
   );

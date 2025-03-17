@@ -1,42 +1,82 @@
+import React, { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
-import Button from "../components/Button"; // Import the Button component
-import image from "../assets/images/image.png";
+import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import { getMovies } from "../service/api.service";
-import { useEffect , useState} from "react";
+import "./Home.css";
 
-function Home() {
+const Home = () => {
   const navigate = useNavigate();
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const userData = JSON.parse(localStorage.getItem("user")) || null;
+  const role = userData?.role;
 
   useEffect(() => {
-    fetchData();
+    fetchMovies();
   }, []);
-  
-  async function fetchData() {
-    const movies = await getMovies();
-    console.log(movies);
-    setMovies(() => movies);
-  }
+
+  const fetchMovies = async () => {
+    try {
+      const data = await getMovies();
+      setMovies(data);
+    } catch (error) {
+      console.error("Failed to fetch movies:", error);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
-    <>
-      <div className="movie-list">
-        <Button
-          label="Create Movie"
-          style={{ display: "flex", marginLeft: "auto" }}
-          onClick={() => {
-            navigate("/create-movie");
-          }}
-        />
-        <div>Browse Movies</div>
-        {movies && movies.map((movie, index) => (
-          <>
-         <MovieCard key={index} {...movie} />
-         </>
-        ))}
+    <div className="home-container">
+      <div className="home-header">
+        <h2 className="home-title">Browse Movies</h2>
+
+        <div className="home-buttons">
+          {role === "admin" && (
+            <Button
+              label="Create Movie"
+              className="create-movie-btn"
+              onClick={() => navigate("/create-movie")}
+            />
+          )}
+
+          {role ? (
+            <Button
+              label="Logout"
+              className="logout-btn"
+              onClick={handleLogout}
+            />
+          ) : (
+            <Button
+              label="Login"
+              className="login-btn"
+              onClick={handleLogin}
+            />
+          )}
+        </div>
       </div>
-    </>
+
+      <div>
+        {movies?.length > 0 ? (
+          movies.map((movie, index) => (
+            <div key={index}>
+              <MovieCard {...movie} refreshMovies={fetchMovies} />
+            </div>
+          ))
+        ) : (
+          <div className="no-movies">No movies available.</div>
+        )}
+      </div>
+    </div>
   );
-}
+};
 
 export default Home;

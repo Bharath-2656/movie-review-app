@@ -1,37 +1,81 @@
-.create-movie {
-  width: 100%;
-  text-align: left;
+.create-movie-container {
+  background-color: var(--primaryBackground);
+  color: var(--text);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  border: 1px solid var(--border);
+  position: relative;
 }
 
-.form-group {
+.back-arrow {
+  background: transparent;
+  border: none;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
 }
 
-.form-group label {
-  width: 60%;
-  margin: 0 auto 8px;
+.back-arrow:hover {
+  color: var(--primary);
+}
+
+.create-movie-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.create-movie-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.create-movie-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.create-movie-form input,
+.create-movie-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--secondaryBackground);
+  color: var(--text);
+  font-size: 1rem;
 }
 
 .submit-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
+  background-color: var(--primary);
+  color: #000;
   border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin: 0 auto;
+  transition: background-color 0.3s ease;
+  margin-top: 1.2rem;
+  width: 100%;
 }
 
 .submit-button:hover {
-  background-color: var(--success-bg);
+  background-color: var(--primaryHover);
 }
 
-.disabled {
-  background-color: red !important;
-  cursor: not-allowed;
+.error-message {
+  color: var(--error);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }

@@ -1,60 +1,76 @@
 import React, { useState } from 'react';
-import { FaEdit, FaTrashAlt, FaCheck } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import './MovieCard.css';
-import RatingComponent from './Rating';
+import Review from './Review';
+import ReviewList from './ReviewList';
 import DeleteConfirmationModal from './ConfirmationModal';
+import { deleteMovie } from '../service/api.service';
 
-const MovieCard = ({ id, title, description, releaseYear, genre, director, imageUrl }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const handleClickOpen = () => {
-    setOpenModal(true);
-  };
+const MovieCard = ({ id, title, description, releaseYear, genre, director, imageUrl, refreshMovies }) => {
+  const userData = JSON.parse(localStorage.getItem('user')) || null;
+  const role = userData?.role;
+  const navigate = useNavigate();
+  
+  const [openReviewModal, setOpenReviewModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const handleClose = () => {
-    setOpenModal(false);
-  };
+  // Dummy review data
+  const dummyReviews = [{ rating: 5, text: "Amazing!" }, { rating: 4, text: "Really enjoyed it." }];
+
+  const handleCloseReview = () => setOpenReviewModal(false);
+
+  const handleOpenDelete = () => setOpenDeleteModal(true);
+  const handleCloseDelete = () => setOpenDeleteModal(false);
 
   const handleDelete = async () => {
-    await onDelete();
-    handleClose();
+    await onDelete(id);
+    refreshMovies();
+    handleCloseDelete();
   };
+
   const onDelete = async (movieId) => {
     try {
-      console.log('Deleting movie:', movieId);
-      // await apiService.deleteMovie(movieId);
-      // Optionally, refetch the list of movies to update the UI
+      await deleteMovie(movieId);
     } catch (error) {
       console.error('Error deleting movie:', error);
     }
   };
 
+  const handleEdit = () => {
+    navigate(`/create-movie?id=${id}`);
+  };
+
   return (
     <div className="movie-card">
-      {imageUrl && <img src={imageUrl} alt={title} className="movie-card-image" />}
-      <div className="movie-card-content">
-        <div className="movie-card-header">
-          <h3>{title}</h3>
-          <div className="movie-card-actions">
-            <button className="edit-button"><FaEdit /> Edit</button>
-            <button className="delete-button" onClick={() => handleClickOpen(id)}><FaTrashAlt /> Delete</button>
-          </div>
-        </div>
-        <p>{description}</p>
+      <div className="movie-card-left">
+        {imageUrl && <img src={imageUrl} alt={title} className="movie-card-image" />}
+        <div className="movie-card-title">{title}</div>
+      </div>
+
+      <div className="movie-card-right">
+        <p className="movie-card-description">{description}</p>
         <p><strong>Release Year:</strong> {releaseYear}</p>
         <p><strong>Genre:</strong> {genre}</p>
         <p><strong>Director:</strong> {director}</p>
-        <div className="movie-card-rating">
-          <div className="stars">
-            <RatingComponent  />
+
+        <Review open={openReviewModal} onClose={handleCloseReview} />
+        <ReviewList reviews={dummyReviews} />
+
+        {/* Admin Actions */}
+        {role === "admin" && (
+          <div className="movie-card-actions">
+            <button className="edit-button" onClick={handleEdit}>
+              <FaEdit /> Edit
+            </button>
+            <button className="delete-button" onClick={handleOpenDelete}>
+              <FaTrashAlt /> Delete
+            </button>
           </div>
-        </div>
+        )}
       </div>
-      <DeleteConfirmationModal
-        key={id}
-        open={openModal}
-        onClose={handleClose}
-        onConfirm={handleDelete}
-      />
+
+      <DeleteConfirmationModal open={openDeleteModal} onClose={handleCloseDelete} onConfirm={handleDelete} />
     </div>
   );
 };
