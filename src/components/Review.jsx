@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { FaStar, FaPen, FaTimes, FaCheck } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import './Review.css';
+import { addReview } from '../service/api.service';
 
-const Review = () => {
+const Review = ({movieId}) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rating, setRating] = useState(0);
@@ -34,8 +35,10 @@ const Review = () => {
     // Simulate saving the review
     console.log('Submitted Review:', { rating, reviewText });
     setIsSubmitted(true);
-    toast.success('Review submitted successfully!');
-    closeModal();
+    addReview({movieId: movieId, rating: rating, description: reviewText}).then(() => {
+      toast.success('Review submitted successfully!');
+      closeModal();
+    });
   };
 
   return (

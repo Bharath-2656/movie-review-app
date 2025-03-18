@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaEye, FaTrashAlt } from 'react-icons/fa';
 import './MovieCard.css';
 import Review from './Review';
-import ReviewList from './ReviewList';
 import DeleteConfirmationModal from './ConfirmationModal';
 import { deleteMovie } from '../service/api.service';
 
@@ -22,6 +21,7 @@ const MovieCard = ({ id, title, description, releaseYear, genre, director, image
 
   const handleOpenDelete = () => setOpenDeleteModal(true);
   const handleCloseDelete = () => setOpenDeleteModal(false);
+
 
   const handleDelete = async () => {
     await onDelete(id);
@@ -53,9 +53,11 @@ const MovieCard = ({ id, title, description, releaseYear, genre, director, image
         <p><strong>Release Year:</strong> {releaseYear}</p>
         <p><strong>Genre:</strong> {genre}</p>
         <p><strong>Director:</strong> {director}</p>
+         <button className="review-button" style={{width: '40%'}} onClick={()=> navigate(`/review/movie/?id=${id}`)} >
+          <FaEye /> View Reviews
+        </button>
 
-        <Review open={openReviewModal} onClose={handleCloseReview} />
-        <ReviewList reviews={dummyReviews} />
+        <Review movieId={id} open={openReviewModal} onClose={handleCloseReview} />
 
         {/* Admin Actions */}
         {role === "admin" && (
