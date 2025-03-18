@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import "./MovieCard.css";
-import Review from "./Review";
+import Review from "../Review";
 import DeleteConfirmationModal from "./ConfirmationModal";
-import { deleteMovie } from "../service/api.service";
+import { deleteMovie } from "../../service/api.service";
 
 const MovieCard = ({
   id,

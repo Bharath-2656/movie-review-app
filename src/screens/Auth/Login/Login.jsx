@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../../service/api.service";
+import { loginUser } from "../../../service/api.service";
 import "./Login.css";
 
 const Login = () => {

@@ -3,7 +3,7 @@ import './CreateMovie.css';
 import CustomInput from '../components/CustomInput';
 import Button from '../components/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { createMovie, getMovieById, updateMovie } from '../service/api.service';
+import { createMovie, getMovieById, updateMovie } from '../../service/api.service';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const CreateMovie = () => {

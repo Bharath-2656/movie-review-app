@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import "./ReviewList.css";
 import { FaEdit, FaStar, FaTrashAlt } from "react-icons/fa";
 import DeleteConfirmationModal from "./ConfirmationModal";
-import { deleteReview } from "../service/api.service";
+import { deleteReview } from "../../service/api.service";
 import Review from "./Review";
 
 const ReviewList = ({ reviews, refreshReviews }) => {

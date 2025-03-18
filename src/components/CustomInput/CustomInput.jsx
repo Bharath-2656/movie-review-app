@@ -1,6 +1,6 @@
 import React from "react";
 import "./CustomInput.css";
-import { getTheme } from "../theme/theme";
+import { getTheme } from "../../theme/theme";
 
 const CustomInput = ({ name, label, type, value, onChange, required, error, style }) => {
   const theme = getTheme();
