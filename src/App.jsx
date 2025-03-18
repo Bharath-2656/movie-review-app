@@ -9,6 +9,7 @@ import Register from './screens/Auth/Register/Register'
 
 import { configureTheme, getTheme } from './theme/theme'
 import ViewReview from './screens/Review/ViewReview'
+import ProtectedRoute from './config/Route/ProtectedRoute'
 
 function App() {
   useEffect(() => {
@@ -31,7 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/create-movie" element={<CreateMovie />} />
+          <Route path="/create-movie" element={
+              <ProtectedRoute element={<CreateMovie />} allowedRoles={['admin']}/>
+            } />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/review/movie" element={<ViewReview />} />
