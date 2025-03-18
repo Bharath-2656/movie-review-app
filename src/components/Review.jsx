@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaStar, FaPen, FaTimes, FaCheck } from 'react-icons/fa';
+import { FaStar, FaPen, FaTimes, FaCheck, FaEye } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import './Review.css';
 import { addReview } from '../service/api.service';
@@ -43,9 +43,17 @@ const Review = ({movieId}) => {
 
   return (
     <div className="review-container">
+      <div className='review-button-container'>
       <button className="review-button" onClick={openModal}>
         <FaPen /> Add Review
       </button>
+      <button
+        className="review-button"
+        onClick={() => navigate(`/review/movie/?id=${movieId}`)}
+      >
+        <FaEye /> View Reviews
+      </button>
+      </div>
 
       {isModalOpen && (
         <div className="review-modal-overlay">
@@ -63,7 +71,7 @@ const Review = ({movieId}) => {
                   key={star}
                   className="review-star"
                   onClick={() => handleStarClick(star)}
-                  color={star <= rating ? 'gold' : 'gray'}
+                  color={star <= rating ? "gold" : "gray"}
                 />
               ))}
             </div>
@@ -75,7 +83,10 @@ const Review = ({movieId}) => {
               onChange={(e) => setReviewText(e.target.value)}
             />
 
-            <button className="submit-review-button" onClick={handleSubmitReview}>
+            <button
+              className="submit-review-button"
+              onClick={handleSubmitReview}
+            >
               <FaCheck /> Submit Review
             </button>
           </div>
