@@ -73,6 +73,16 @@ export const getReviews = async (movieId) => {
   }
 };
 
+export const deleteReview = async (reviewId) => {
+  try {
+    const response = await axiosInstance.delete(`/reviews/${reviewId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    throw error;
+  }
+};
+
 export const loginUser = async (email, password) => {
   try {
     const response = await axiosInstance.post("auth/login", { email, password });
