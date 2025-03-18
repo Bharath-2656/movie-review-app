@@ -66,3 +66,21 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .home-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-title {
+    margin-bottom: 1rem;
+  }
+
+  .home-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
