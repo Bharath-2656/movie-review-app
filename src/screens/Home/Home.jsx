@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from "react";
-import MovieCard from "../../components/MovieCard/MovieCard";
-import Button from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
-import { getMovies } from "../../service/api.service";
-import "./Home.css";
+import React, { useEffect, useState } from 'react'
+import MovieCard from '../../components/MovieCard/MovieCard'
+import Button from '../../components/Button/Button'
+import { useNavigate } from 'react-router-dom'
+import { getMovies } from '../../service/api.service'
+import './Home.css'
 
 const Home = () => {
-  const navigate = useNavigate();
-  const [movies, setMovies] = useState([]);
-  const userData = JSON.parse(localStorage.getItem("user")) || null;
-  const role = userData?.role;
+  const navigate = useNavigate()
+  const [movies, setMovies] = useState([])
+  const userData = JSON.parse(localStorage.getItem('user')) || null
+  const role = userData?.role
 
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies()
+  }, [])
 
   const fetchMovies = async () => {
     try {
-      const data = await getMovies();
-      setMovies(data);
+      const data = await getMovies()
+      setMovies(data)
     } catch (error) {
-      console.error("Failed to fetch movies:", error);
+      console.error('Failed to fetch movies:', error)
     }
-  };
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    navigate('/login')
+  }
 
   const handleLogin = () => {
-    navigate("/login");
-  };
+    navigate('/login')
+  }
 
   return (
     <div className="home-container">
@@ -40,11 +40,11 @@ const Home = () => {
         <h2 className="home-title">Browse Movies</h2>
 
         <div className="home-buttons">
-          {role === "admin" && (
+          {role === 'admin' && (
             <Button
               label="Create Movie"
               className="create-movie-btn"
-              onClick={() => navigate("/create-movie")}
+              onClick={() => navigate('/create-movie')}
             />
           )}
 
@@ -55,11 +55,7 @@ const Home = () => {
               onClick={handleLogout}
             />
           ) : (
-            <Button
-              label="Login"
-              className="login-btn"
-              onClick={handleLogin}
-            />
+            <Button label="Login" className="login-btn" onClick={handleLogin} />
           )}
         </div>
       </div>
@@ -68,7 +64,7 @@ const Home = () => {
         {movies?.length > 0 ? (
           movies.map((movie, index) => (
             <div key={index}>
-              <MovieCard {...movie} type='home' refreshMovies={fetchMovies} />
+              <MovieCard {...movie} type="home" refreshMovies={fetchMovies} />
             </div>
           ))
         ) : (
@@ -76,7 +72,7 @@ const Home = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

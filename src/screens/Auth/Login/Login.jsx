@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../../../service/api.service";
-import "./Login.css";
+import React, { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { loginUser } from '../../../service/api.service'
+import './Login.css'
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user) {
-        navigate('/home');
-      }
-    }, [navigate]);
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+      navigate('/home')
+    }
+  }, [navigate])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const data = await loginUser(email, password);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/home");
+      const data = await loginUser(email, password)
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      navigate('/home')
     } catch (err) {
-      setError("Invalid email or password");
+      setError('Invalid email or password')
     }
-  };
+  }
 
   return (
     <div className="login-page">
@@ -56,7 +56,7 @@ const Login = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

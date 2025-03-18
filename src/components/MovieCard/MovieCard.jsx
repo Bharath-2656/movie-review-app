@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaEdit, FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
-import "./MovieCard.css";
-import Review from "../Review/Review";
-import DeleteConfirmationModal from "../ConfirmationModel/ConfirmationModal";
-import { deleteMovie } from "../../service/api.service";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FaEdit, FaEye, FaPen, FaTrashAlt } from 'react-icons/fa'
+import './MovieCard.css'
+import Review from '../Review/Review'
+import DeleteConfirmationModal from '../ConfirmationModel/ConfirmationModal'
+import { deleteMovie } from '../../service/api.service'
 
 const MovieCard = ({
   id,
@@ -16,45 +16,45 @@ const MovieCard = ({
   imageUrl,
   type,
   refreshMovies,
-  hasUserReviewed
+  hasUserReviewed,
 }) => {
-  const userData = JSON.parse(localStorage.getItem("user")) || null;
-  const role = userData?.role;
-  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem('user')) || null
+  const role = userData?.role
+  const navigate = useNavigate()
 
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => {
-    const userData = JSON.parse(localStorage.getItem("user")) || null;
+    const userData = JSON.parse(localStorage.getItem('user')) || null
     if (!userData) {
       // Not logged in: redirect to login
-      navigate("/login");
+      navigate('/login')
     } else {
-      setIsModalOpen(true);
+      setIsModalOpen(true)
     }
-  };
+  }
 
-  const handleOpenDelete = () => setOpenDeleteModal(true);
-  const handleCloseDelete = () => setOpenDeleteModal(false);
+  const handleOpenDelete = () => setOpenDeleteModal(true)
+  const handleCloseDelete = () => setOpenDeleteModal(false)
 
   const handleDelete = async () => {
-    await onDelete(id);
-    refreshMovies();
-    handleCloseDelete();
-  };
+    await onDelete(id)
+    refreshMovies()
+    handleCloseDelete()
+  }
 
   const onDelete = async (movieId) => {
     try {
-      await deleteMovie(movieId);
+      await deleteMovie(movieId)
     } catch (error) {
-      console.error("Error deleting movie:", error);
+      console.error('Error deleting movie:', error)
     }
-  };
+  }
 
   const handleEdit = () => {
-    navigate(`/create-movie?id=${id}`);
-  };
+    navigate(`/create-movie?id=${id}`)
+  }
 
   return (
     <div className="movie-card">
@@ -78,10 +78,12 @@ const MovieCard = ({
         </p>
 
         <div className="review-button-container">
-          {!hasUserReviewed &&<button className="review-button" onClick={openModal}>
-            <FaPen /> Add Review
-          </button>}
-          {type == "home" && (
+          {!hasUserReviewed && (
+            <button className="review-button" onClick={openModal}>
+              <FaPen /> Add Review
+            </button>
+          )}
+          {type == 'home' && (
             <button
               className="review-button"
               onClick={() => navigate(`/review/movie/?id=${id}`)}
@@ -100,7 +102,7 @@ const MovieCard = ({
         )}
 
         {/* Admin Actions */}
-        {role === "admin" && (
+        {role === 'admin' && (
           <div className="movie-card-actions">
             <button className="edit-button" onClick={handleEdit}>
               <FaEdit /> Edit
@@ -116,11 +118,11 @@ const MovieCard = ({
         open={openDeleteModal}
         onClose={handleCloseDelete}
         onConfirm={handleDelete}
-        title={"Delete Movie"}
-        description={"Are you sure you want to delete this movie?"}
+        title={'Delete Movie'}
+        description={'Are you sure you want to delete this movie?'}
       />
     </div>
-  );
-};
+  )
+}
 
-export default MovieCard;
+export default MovieCard

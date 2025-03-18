@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import './ConfirmationModal.css';
+import React, { useState } from 'react'
+import './ConfirmationModal.css'
 
-const DeleteConfirmationModal = ({ open, onClose, onConfirm, title, description }) => {
-  const [confirming, setConfirming] = useState(false);
+const DeleteConfirmationModal = ({
+  open,
+  onClose,
+  onConfirm,
+  title,
+  description,
+}) => {
+  const [confirming, setConfirming] = useState(false)
 
   const handleConfirmClick = () => {
-    setConfirming(true);
-    console.log("Confirming.....")
+    setConfirming(true)
+    console.log('Confirming.....')
     setTimeout(() => {
-        onConfirm();
-        onClose();
-    }, 100);
-  };
+      onConfirm()
+      onClose()
+    }, 100)
+  }
 
-  if (!open) return null;
+  if (!open) return null
 
   return (
     <div className="delete-modal-overlay">
@@ -21,7 +27,9 @@ const DeleteConfirmationModal = ({ open, onClose, onConfirm, title, description 
         <h2 className="delete-modal-title">{title}</h2>
         <p className="delete-modal-text">{description}</p>
         <div className="delete-modal-actions">
-          <button className="cancel-button" onClick={onClose}>Cancel</button>
+          <button className="cancel-button" onClick={onClose}>
+            Cancel
+          </button>
           <button
             className="confirm-button"
             onClick={handleConfirmClick}
@@ -32,7 +40,7 @@ const DeleteConfirmationModal = ({ open, onClose, onConfirm, title, description 
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DeleteConfirmationModal;
+export default DeleteConfirmationModal

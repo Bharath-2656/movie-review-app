@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { registerUser } from "../../../service/api.service";
-import "./Register.css";
+import React, { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { registerUser } from '../../../service/api.service'
+import './Register.css'
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'))
     if (user) {
-      navigate('/home');
+      navigate('/home')
     }
-  }, [navigate]);
+  }, [navigate])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await registerUser(username, email, password);
-      navigate("/login");
+      await registerUser(username, email, password)
+      navigate('/login')
     } catch (err) {
-      setError("Registration failed. Try again.");
+      setError('Registration failed. Try again.')
     }
-  };
+  }
 
   return (
     <div className="register-page">
@@ -62,7 +62,7 @@ const Register = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

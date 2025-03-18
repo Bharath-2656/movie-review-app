@@ -1,13 +1,22 @@
-import React from "react";
-import "./CustomInput.css";
-import { getTheme } from "../../theme/theme";
+import React from 'react'
+import './CustomInput.css'
+import { getTheme } from '../../theme/theme'
 
-const CustomInput = ({ name, label, type, value, onChange, required, error, style }) => {
-  const theme = getTheme();
+const CustomInput = ({
+  name,
+  label,
+  type,
+  value,
+  onChange,
+  required,
+  error,
+  style,
+}) => {
+  const theme = getTheme()
 
   return (
     <div className="custom-input" style={style}>
-      {type === "textarea" ? (
+      {type === 'textarea' ? (
         <textarea
           name={name}
           type={type}
@@ -41,7 +50,7 @@ const CustomInput = ({ name, label, type, value, onChange, required, error, styl
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CustomInput;
+export default CustomInput

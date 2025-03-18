@@ -1,57 +1,57 @@
 // src/screens/ViewReview.jsx
 
-import React, { useEffect, useState, useCallback, useMemo } from "react";
-import MovieCard from "../../components/MovieCard/MovieCard";
-import ReviewList from "../../components/ReviewList/ReviewList";
-import { getMovieById, getReviews } from "../../service/api.service";
-import Button from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import React, { useEffect, useState, useCallback, useMemo } from 'react'
+import MovieCard from '../../components/MovieCard/MovieCard'
+import ReviewList from '../../components/ReviewList/ReviewList'
+import { getMovieById, getReviews } from '../../service/api.service'
+import Button from '../../components/Button/Button'
+import { useNavigate } from 'react-router-dom'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 const ViewReview = () => {
-  const [movie, setMovie] = useState();
-  const [reviews, setReviews] = useState([]);
-  const queryParams = new URLSearchParams(location.search);
-  const movieId = queryParams.get("id");
-  const navigate = useNavigate();
+  const [movie, setMovie] = useState()
+  const [reviews, setReviews] = useState([])
+  const queryParams = new URLSearchParams(location.search)
+  const movieId = queryParams.get('id')
+  const navigate = useNavigate()
   const currentUser = useMemo(
-    () => JSON.parse(localStorage.getItem("user")),
+    () => JSON.parse(localStorage.getItem('user')),
     []
-  );
+  )
 
   const fetchMovies = useCallback(async () => {
     try {
-      const movieData = await getMovieById(movieId);
-      setMovie(movieData);
+      const movieData = await getMovieById(movieId)
+      setMovie(movieData)
     } catch (error) {
-      console.error("Error fetching movies:", error);
+      console.error('Error fetching movies:', error)
     }
-  }, [movieId]);
+  }, [movieId])
 
   const fetchReviews = useCallback(async () => {
     try {
-      const reviews = await getReviews(movieId);
-      setReviews(reviews);
+      const reviews = await getReviews(movieId)
+      setReviews(reviews)
     } catch (error) {
-      console.error("Error fetching reviews:", error);
+      console.error('Error fetching reviews:', error)
     }
-  }, [movieId]);
+  }, [movieId])
 
   const hasUserReviewed = useMemo(() => {
-    if (!currentUser || !reviews) return false;
-    return reviews.some((review) => review.userId === currentUser.id);
-  }, [currentUser, reviews]);
+    if (!currentUser || !reviews) return false
+    return reviews.some((review) => review.userId === currentUser.id)
+  }, [currentUser, reviews])
 
   useEffect(() => {
-    fetchMovies();
-    fetchReviews();
-  }, [fetchMovies, fetchReviews]);
+    fetchMovies()
+    fetchReviews()
+  }, [fetchMovies, fetchReviews])
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    navigate('/login')
+  }
 
   return (
     <div>
@@ -73,7 +73,7 @@ const ViewReview = () => {
           <div className="movie-card-container">
             <MovieCard
               {...movie}
-              type={"review-page"}
+              type={'review-page'}
               refreshMovies={fetchMovies}
               hasUserReviewed={hasUserReviewed}
             />
@@ -82,7 +82,7 @@ const ViewReview = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ViewReview;
+export default ViewReview
