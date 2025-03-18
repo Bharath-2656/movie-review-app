@@ -72,6 +72,15 @@ export const getReviews = async (movieId) => {
     throw error;
   }
 };
+export const editReview = async (reviewId, data) => {
+  try {
+    const response = await axiosInstance.put(`/reviews/${reviewId}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error Editing reviews:", error);
+    throw error;
+  }
+}
 
 export const deleteReview = async (reviewId) => {
   try {
