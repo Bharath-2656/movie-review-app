@@ -1,6 +1,6 @@
 import React from 'react';
 import './Button.css'; // Import the CSS file for styling
-import {getTheme}  from '../theme/theme'
+import {getTheme}  from '../../theme/theme'
 
 const Button = ({ children, label, onClick, style, className }) => {
   const theme = getTheme();

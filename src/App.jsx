@@ -1,24 +1,42 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CreateMovie from './screens/CreateMovie';
-import Home from './screens/Home';
-import { configureTheme, getTheme } from './theme/theme';
 import { useEffect } from 'react';
 
+import Home from './screens/Home';
+import CreateMovie from './screens/CreateMovie';
+import Login from './screens/Auth/Login';
+import Register from './screens/Auth/Register';
+
+import { configureTheme, getTheme } from './theme/theme';
+import ViewReview from './screens/ViewReview';
+
 function App() {
-  const theme = getTheme();
   useEffect(() => {
     configureTheme();
   }, []);
 
+  const theme = getTheme();
+
   return (
-    <div style={{width: '100%', height: '100%', backgroundColor: theme.primaryBackground }}>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/create-movie" element={<CreateMovie />} />
-      </Routes>
-    </Router>
+    <div
+      className="app-container"
+      style={{
+        width: '100%',
+        minHeight: '100vh',
+        backgroundColor: theme.primaryBackground,
+        color: theme.text,
+      }}
+    >
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/create-movie" element={<CreateMovie />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/review/movie" element={<ViewReview />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
