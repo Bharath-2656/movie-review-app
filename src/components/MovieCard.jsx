@@ -53,9 +53,6 @@ const MovieCard = ({ id, title, description, releaseYear, genre, director, image
         <p><strong>Release Year:</strong> {releaseYear}</p>
         <p><strong>Genre:</strong> {genre}</p>
         <p><strong>Director:</strong> {director}</p>
-         <button className="review-button" style={{width: '40%'}} onClick={()=> navigate(`/review/movie/?id=${id}`)} >
-          <FaEye /> View Reviews
-        </button>
 
         <Review movieId={id} open={openReviewModal} onClose={handleCloseReview} />
 
