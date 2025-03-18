@@ -5,6 +5,9 @@
   border-radius: 10px;
   border: 1px solid var(--border-color);
   color: var(--text-color);
+  margin-left: auto;
+  margin-right: auto;
+  width: 75vw;
 }
 
 .review-list-heading {
@@ -54,8 +57,7 @@
 }
 
 .review-text {
-  display: flex;
-  justify-content: flex-start;
+  text-align: left;
   font-style: italic;
   font-size: 0.95rem;
   margin-bottom: 0.3rem;

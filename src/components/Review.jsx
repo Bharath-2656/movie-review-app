@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { FaStar, FaTimes, FaCheck } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import './Review.css';
-import { addReview } from '../service/api.service';
+import { addReview, editReview } from '../service/api.service';
 
-const Review = ({movieId, isModalOpen, setIsModalOpen}) => {
-  const [rating, setRating] = useState(0);
-  const [reviewText, setReviewText] = useState('');
+const Review = ({movieId, setIsModalOpen, review}) => {
+  const [rating, setRating] = useState(review?.rating || 0);
+  const [reviewText, setReviewText] = useState(review?.description || '');
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
 
   const handleStarClick = (value) => setRating(value);
 
@@ -18,18 +20,25 @@ const Review = ({movieId, isModalOpen, setIsModalOpen}) => {
       return;
     }
 
+    if (review) {
+      console.log(reviewText);
+      editReview(review.id, {movieId: movieId, rating: rating, description: reviewText}).then(() => {
+        toast.success('Review updated successfully!');
+        closeModal();
+      })
+    }
+    else {
     // Simulate saving the review
-    console.log('Submitted Review:', { rating, reviewText });
     addReview({movieId: movieId, rating: rating, description: reviewText}).then(() => {
       toast.success('Review submitted successfully!');
       closeModal();
     });
+  }
   };
 
   return (
     <div className="review-container">
 
-      {isModalOpen && (
         <div className="review-modal-overlay">
           <div className="review-modal">
             <div className="review-modal-header">
@@ -54,6 +63,7 @@ const Review = ({movieId, isModalOpen, setIsModalOpen}) => {
               className="review-textarea"
               placeholder="Write your review here..."
               value={reviewText}
+              contentEditable={true}
               onChange={(e) => setReviewText(e.target.value)}
             />
 
@@ -65,8 +75,6 @@ const Review = ({movieId, isModalOpen, setIsModalOpen}) => {
             </button>
           </div>
         </div>
-      )}
-
       <ToastContainer />
     </div>
   );
