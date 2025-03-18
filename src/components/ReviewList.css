@@ -36,6 +36,14 @@
 }
 
 .review-item {
+  padding: 2%;
+  display: flex;
+  justify-content: space-between; /* Aligns review-rating and review-text to the start */
+  align-items: center; /* Vertically centers the items */
+  grid-template-columns: 30% 70%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background-color: var(--secondaryBackground);
   margin-bottom: 1rem;
 }
 
@@ -46,6 +54,8 @@
 }
 
 .review-text {
+  display: flex;
+  justify-content: flex-start;
   font-style: italic;
   font-size: 0.95rem;
   margin-bottom: 0.3rem;
@@ -54,4 +64,12 @@
 .review-divider {
   border: none;
   border-top: 1px solid var(--border-color);
+}
+
+.review-author {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 0.3rem;
 }
