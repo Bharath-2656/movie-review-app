@@ -12,7 +12,7 @@ const Login = () => {
   useEffect(() => {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user) {
-        navigate('/');
+        navigate('/home');
       }
     }, [navigate]);
 
@@ -22,7 +22,7 @@ const Login = () => {
       const data = await loginUser(email, password);
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       setError("Invalid email or password");
     }

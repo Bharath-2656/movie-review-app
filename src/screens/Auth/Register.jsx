@@ -13,7 +13,7 @@ const Register = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
-      navigate('/');
+      navigate('/home');
     }
   }, [navigate]);
 

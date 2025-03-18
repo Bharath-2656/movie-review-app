@@ -80,7 +80,7 @@ const CreateMovie = () => {
       } else {
         await createMovie(movie);
       }
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error('Failed to submit movie:', error);
     }
