@@ -8,6 +8,7 @@ import Login from './screens/Auth/Login';
 import Register from './screens/Auth/Register';
 
 import { configureTheme, getTheme } from './theme/theme';
+import ViewReview from './screens/ViewReview';
 
 function App() {
   useEffect(() => {
@@ -28,10 +29,12 @@ function App() {
     >
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/create-movie" element={<CreateMovie />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/review/movie" element={<ViewReview />} />
         </Routes>
       </Router>
     </div>
