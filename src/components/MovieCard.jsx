@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit, FaEye, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaEye, FaPen, FaTrashAlt } from 'react-icons/fa';
 import './MovieCard.css';
 import Review from './Review';
 import DeleteConfirmationModal from './ConfirmationModal';
@@ -11,13 +11,20 @@ const MovieCard = ({ id, title, description, releaseYear, genre, director, image
   const role = userData?.role;
   const navigate = useNavigate();
   
-  const [openReviewModal, setOpenReviewModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
-  // Dummy review data
-  const dummyReviews = [{ rating: 5, text: "Amazing!" }, { rating: 4, text: "Really enjoyed it." }];
+  const openModal = () => {
+    const userData = JSON.parse(localStorage.getItem('user')) || null;
+    if (!userData) {
+      // Not logged in: redirect to login
+      navigate('/login');
+    } else {
+      setIsModalOpen(true);
+    }
+  };
 
-  const handleCloseReview = () => setOpenReviewModal(false);
 
   const handleOpenDelete = () => setOpenDeleteModal(true);
   const handleCloseDelete = () => setOpenDeleteModal(false);
@@ -54,7 +61,19 @@ const MovieCard = ({ id, title, description, releaseYear, genre, director, image
         <p><strong>Genre:</strong> {genre}</p>
         <p><strong>Director:</strong> {director}</p>
 
-        <Review movieId={id} open={openReviewModal} onClose={handleCloseReview} />
+        <div className='review-button-container'>
+          <button className="review-button" onClick={openModal}>
+            <FaPen /> Add Review
+          </button>
+          <button
+            className="review-button"
+            onClick={() => navigate(`/review/movie/?id=${id}`)}
+          >
+            <FaEye /> View Reviews
+          </button>
+          </div>
+
+        <Review movieId={id} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
 
         {/* Admin Actions */}
         {role === "admin" && (
@@ -69,7 +88,7 @@ const MovieCard = ({ id, title, description, releaseYear, genre, director, image
         )}
       </div>
 
-      <DeleteConfirmationModal open={openDeleteModal} onClose={handleCloseDelete} onConfirm={handleDelete} />
+      <DeleteConfirmationModal open={openDeleteModal} onClose={handleCloseDelete} onConfirm={handleDelete} title={'Delete Movie'} description={'Are you sure you want to delete this movie?'} />
     </div>
   );
 };

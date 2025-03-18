@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaStar, FaPen, FaTimes, FaCheck, FaEye } from 'react-icons/fa';
+import { FaStar, FaTimes, FaCheck } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import './Review.css';
 import { addReview } from '../service/api.service';
 
-const Review = ({movieId}) => {
-  const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const Review = ({movieId, isModalOpen, setIsModalOpen}) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const openModal = () => {
-    const userData = JSON.parse(localStorage.getItem('user')) || null;
-    if (!userData) {
-      // Not logged in: redirect to login
-      navigate('/login');
-    } else {
-      setIsModalOpen(true);
-    }
-  };
 
   const closeModal = () => setIsModalOpen(false);
 
@@ -34,7 +20,6 @@ const Review = ({movieId}) => {
 
     // Simulate saving the review
     console.log('Submitted Review:', { rating, reviewText });
-    setIsSubmitted(true);
     addReview({movieId: movieId, rating: rating, description: reviewText}).then(() => {
       toast.success('Review submitted successfully!');
       closeModal();
@@ -43,17 +28,6 @@ const Review = ({movieId}) => {
 
   return (
     <div className="review-container">
-      <div className='review-button-container'>
-      <button className="review-button" onClick={openModal}>
-        <FaPen /> Add Review
-      </button>
-      <button
-        className="review-button"
-        onClick={() => navigate(`/review/movie/?id=${movieId}`)}
-      >
-        <FaEye /> View Reviews
-      </button>
-      </div>
 
       {isModalOpen && (
         <div className="review-modal-overlay">
