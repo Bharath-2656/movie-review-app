@@ -64,7 +64,7 @@ const Home = () => {
         {movies?.length > 0 ? (
           movies.map((movie, index) => (
             <div key={index}>
-              <MovieCard {...movie} type="home" refreshMovies={fetchMovies} />
+              <MovieCard {...movie} type="home" refreshMovies={fetchMovies} hasUserReviewed={true} />
             </div>
           ))
         ) : (
