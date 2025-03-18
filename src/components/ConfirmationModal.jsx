@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ConfirmationModal.css';
 
-const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
+const DeleteConfirmationModal = ({ open, onClose, onConfirm, title, description }) => {
   const [confirming, setConfirming] = useState(false);
 
   const handleConfirmClick = () => {
@@ -18,8 +18,8 @@ const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
   return (
     <div className="delete-modal-overlay">
       <div className="delete-modal">
-        <h2 className="delete-modal-title">Delete Movie</h2>
-        <p className="delete-modal-text">Are you sure you want to delete this movie?</p>
+        <h2 className="delete-modal-title">{title}</h2>
+        <p className="delete-modal-text">{description}</p>
         <div className="delete-modal-actions">
           <button className="cancel-button" onClick={onClose}>Cancel</button>
           <button
