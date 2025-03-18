@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './CreateMovie.css';
-import CustomInput from '../components/CustomInput';
-import Button from '../components/Button';
+import CustomInput from '../../components/CustomInput/CustomInput';
+import Button from '../../components/Button/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { createMovie, getMovieById, updateMovie } from '../../service/api.service';
 import { AiOutlineArrowLeft } from 'react-icons/ai';

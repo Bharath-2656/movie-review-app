@@ -1,10 +1,10 @@
 // src/screens/ViewReview.jsx
 
 import React, { useEffect, useState, useCallback, useMemo } from "react";
-import MovieCard from "../components/MovieCard";
-import ReviewList from "../components/ReviewList";
+import MovieCard from "../../components/MovieCard/MovieCard";
+import ReviewList from "../../components/ReviewList/ReviewList";
 import { getMovieById, getReviews } from "../../service/api.service";
-import Button from "../components/Button";
+import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 

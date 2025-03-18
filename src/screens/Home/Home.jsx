@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import MovieCard from "../components/MovieCard";
-import Button from "../components/Button";
+import MovieCard from "../../components/MovieCard/MovieCard";
+import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { getMovies } from "../../service/api.service";
 import "./Home.css";

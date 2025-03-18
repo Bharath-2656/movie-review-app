@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaStar, FaTimes, FaCheck } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import './Review.css';
-import { addReview, editReview } from '../service/api.service';
+import { addReview, editReview } from '../../service/api.service';
 
 const Review = ({movieId, setIsModalOpen, review}) => {
   const [rating, setRating] = useState(review?.rating || 0);
