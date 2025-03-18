@@ -22,7 +22,7 @@ npm run dev
     - `Button.jsx`: A customizable button component.
     - `MovieCard.jsx`: A component to display movie details.
     - `Rating.jsx`: A rating component with a star-based interface and toast notifications for feedback.
-  - `screens/`: Higher-level components that represent different views of the application.
+  - `screens/`: Higher-level components that represent different views/pages of the application.
     - `Home.jsx`: The home screen displaying a list of movies.
   - `service/`: Service functions to interact with the API.
     - `api.service.js`: Functions to fetch, create, update, delete, and add reviews for movies.
@@ -36,6 +36,32 @@ npm run dev
 - `build`: Builds the application for production.
 - `lint`: Lints the code using ESLint.
 - `preview`: Previews the built application.
+
+### Environment Variables
+
+The application uses the following environment variables:
+
+- `REACT_APP_API_URL`: The base URL for the API. Default value is `http://localhost:3000/api`.
+
+### Dependencies
+
+The project dependencies are managed using npm and can be found in the `package.json` file.
+
+
+## Additional Details
+
+### API Endpoints
+
+The application interacts with the following API endpoints:
+
+- `GET /api/movies`: Fetches a list of movies.
+- `POST /api/movies`: Creates a new movie.
+- `PUT /api/movies/:id`: Updates an existing movie.
+- `DELETE /api/movies/:id`: Deletes a movie.
+- `GET /api/reviews/movie/:movieId`: Gets a Movie review
+- `POST /api/reviews/:movieId`: Adds a review to a specific movie.
+- `PUT /api/reviews/:reviewId`: Updates a review
+- `DELETE /api/reviews/:reviewId`: Deletes a review
 
 ## Configuration Files Documentation
 
