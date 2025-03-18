@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
+const ProtectedRoute = ({ element, allowedRoles }) => {
   
   const user  = JSON.parse(localStorage.getItem('user'));
 
@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/home" replace />;
   }
 
-  return children;
+  return element;
 };
 
 export default ProtectedRoute;
