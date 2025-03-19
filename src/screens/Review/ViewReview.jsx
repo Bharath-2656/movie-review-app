@@ -77,7 +77,7 @@ const ViewReview = () => {
               refreshMovies={fetchMovies}
               hasUserReviewed={hasUserReviewed}
             />
-            <ReviewList reviews={reviews || []} refreshReviews={fetchReviews} />
+            <ReviewList reviews={reviews || []} />
           </div>
         </div>
       )}

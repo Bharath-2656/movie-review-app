@@ -41,7 +41,11 @@ npm run dev
 
 The application uses the following environment variables:
 
-- `REACT_APP_API_URL`: The base URL for the API. Default value is `http://localhost:3000/api`.
+- `VITE_API_URL`: The base URL for the API. Default value is `http://localhost:3000/api`.
+
+```
+VITE_API_URL=http://localhost:3000/api
+```
 
 ### Dependencies
 
@@ -89,3 +93,4 @@ If you are developing a production application, we recommend using TypeScript an
 ## Contributing
 
 We welcome contributions! Please follow the guidelines in the CONTRIBUTING.md file.
+

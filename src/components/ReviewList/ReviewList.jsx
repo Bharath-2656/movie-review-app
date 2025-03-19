@@ -1,44 +1,8 @@
-import React, { useState, useMemo } from 'react'
+import React from 'react'
 import './ReviewList.css'
-import { FaEdit, FaStar, FaTrashAlt } from 'react-icons/fa'
-import DeleteConfirmationModal from '../ConfirmationModel/ConfirmationModal'
-import { deleteReview } from '../../service/api.service'
-import Review from '../Review/Review'
+import { FaStar } from 'react-icons/fa'
 
-const ReviewList = ({ reviews, refreshReviews }) => {
-  const [openReviewModal, setOpenReviewModal] = useState(false)
-  const [openDeleteModal, setOpenDeleteModal] = useState(false)
-  const currentUser = useMemo(
-    () => JSON.parse(localStorage.getItem('user')),
-    []
-  )
-
-  const handleOpenDelete = () => setOpenDeleteModal(true)
-  const handleCloseDelete = () => setOpenDeleteModal(false)
-
-  const handleDelete = async (id) => {
-    await onDelete(id)
-    refreshReviews()
-    handleCloseDelete()
-  }
-
-  const onDelete = async (reviewId) => {
-    try {
-      await deleteReview(reviewId)
-    } catch (error) {
-      console.error('Error deleting movie:', error)
-    }
-  }
-
-  const handleEdit = () => {
-    setOpenReviewModal(true)
-  }
-
-  const handleReviewClose = () => {
-    refreshReviews()
-    setOpenReviewModal(false)
-  }
-
+const ReviewList = ({ reviews }) => {
   if (!reviews || reviews.length === 0) {
     return null
   }
@@ -75,38 +39,7 @@ const ReviewList = ({ reviews, refreshReviews }) => {
                   <hr className="review-divider" />
                 )}
               </div>
-              {currentUser.id === review.userId && (
-                <div className="movie-card-actions">
-                  <button
-                    className="edit-button"
-                    onClick={() => handleEdit(review.id)}
-                  >
-                    <FaEdit /> Edit
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => handleOpenDelete(review.id)}
-                  >
-                    <FaTrashAlt /> Delete
-                  </button>
-                </div>
-              )}
             </div>
-            {openReviewModal && (
-              <Review
-                movieId={review.id}
-                setIsModalOpen={handleReviewClose}
-                review={review}
-              />
-            )}
-            <DeleteConfirmationModal
-              key={review.id}
-              open={openDeleteModal}
-              onClose={handleCloseDelete}
-              onConfirm={() => handleDelete(review.id)}
-              title={'Delete Review'}
-              description={'Are you sure you want to delete this review?'}
-            />
           </div>
         ))}
       </div>
