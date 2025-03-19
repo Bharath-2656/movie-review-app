@@ -23,7 +23,7 @@ const Login = () => {
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
       navigate('/home')
-    } catch (err) {
+    } catch {
       setError('Invalid email or password')
     }
   }
